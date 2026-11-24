@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLAIRE WEI — Creative Strategist & Content Producer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0c;
+      --surface: #141418;
+      --surface-hover: #1c1c22;
+      --border: rgba(255, 255, 255, 0.1);
+      --text-primary: #f4f4f6;
+      --text-secondary: #9ca3af;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Noto Sans TC', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 12, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 1.8rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 5.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .hero h1 {
+      font-size: 3.1rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+      max-width: 580px;
+      margin-bottom: 2rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .profile-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      aspect-ratio: 4 / 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+    }
+
+    .profile-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .profile-frame:hover img {
+      transform: scale(1.04);
+    }
+
+    .profile-overlay {
+      position: relative;
+      z-index: 1;
+      background: rgba(10, 10, 12, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .profile-overlay strong {
+      display: block;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .profile-overlay span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .metrics-strip {
+      max-width: 1180px;
+      margin: 0 auto 4.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .metrics-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      gap: 1.5rem;
+    }
+
+    .metric-cell h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .metric-cell p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .works-section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 6rem;
+    }
+
+    .works-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .works-header h2 {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+
+    .card-thumb {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background: #1f1f26;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-thumb img {
+      transform: scale(1.06);
+    }
+
+    .card-meta-top {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .badge-dark {
+      background: rgba(10, 10, 12, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-audio {
+      background: rgba(245, 158, 11, 0.9);
+      color: #000;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-kpi-tag {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .card-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.4rem;
+    }
+
+    .card-action {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* 彈窗 Modal 共用樣式 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #141418;
+      border: 1px solid rgba(255,255,255,0.15);
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 20px;
+      position: relative;
+      animation: modalPop 0.25s ease-out;
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-cover {
+      height: 240px;
+      position: relative;
+      background: #1e1e24;
+    }
+
+    .modal-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-body h2 {
+      font-size: 1.65rem;
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .modal-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .m-kpi {
+      background: #0a0a0c;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .m-kpi strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .m-kpi span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* HTML5 音檔播放器 */
+    .audio-player-card {
+      background: #0a0a0c;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 1.15rem 1.35rem;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .audio-player-card.visible {
+      display: block;
+    }
+
+    .audio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .audio-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .on-air-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .audio-track-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .play-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      color: #000;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+
+    .play-toggle-btn:hover {
+      transform: scale(1.06);
+      background: #fbbf24;
+    }
+
+    .progress-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 999px;
+      transition: width 0.1s linear;
+    }
+
+    .time-readout {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    .m-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .m-block h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .m-block p, .m-block li {
+      color: #d1d5db;
+      font-size: 0.95rem;
+    }
+
+    .m-block ul {
+      padding-left: 1.2rem;
+    }
+
+    .m-block li {
+      margin-bottom: 0.4rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 2rem;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+    }
+
+    /* 一百分誘導彈窗專屬樣式 */
+    .score-modal-box {
+      background: linear-gradient(145deg, #16161c, #0e0e12);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      max-width: 520px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      animation: modalPop 0.25s ease-out;
+      overflow: hidden;
+    }
+
+    .score-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .score-modal-box h2 {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .score-modal-box p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .score-arena {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+      min-height: 120px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .btn-100 {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #000;
+      font-weight: 900;
+      font-size: 1.05rem;
+      padding: 0.95rem 2.2rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      transition: transform 0.2s ease;
+      z-index: 2;
+    }
+
+    .btn-100:hover {
+      transform: scale(1.07);
+    }
+
+    .btn-dodge {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .celebration-box {
+      display: none;
+      animation: modalPop 0.3s ease-out;
+    }
+
+    .celebration-box.active {
+      display: block;
+    }
+
+    .big-100 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin: 0.5rem 0;
+      text-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    }
+
+    .email-pill {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      z-index: 2000;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+      .hero h1 { font-size: 2.3rem; }
+      .metrics-box { grid-template-columns: 1fr 1fr; }
+      .modal-kpis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <header>
+    <div class="nav-inner">
+      <div class="brand"><span class="status-dot"></span>CLAIRE.WEI // PORTFOLIO</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#works">Selected Works</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="about" class="hero">
+    <div>
+      <span class="eyebrow">NCCU Advertising × Business Admin</span>
+      <h1>Turning <em>Insights</em> into<br>Measurable Stories.</h1>
+      <p class="hero-desc">
+        我是魏岑軒（Claire），習慣在感性敘事與理性數據之間找平衡。從觀察消費者的細微痛點出發，將品牌策略、社群病毒擴散、短影音節奏與大型活動統籌，轉化為看得見的真實影響力。
+      </p>
+      <div class="tag-row">
+        <span class="pill">#Brand_PR</span>
+        <span class="pill">#Social_Viral</span>
+        <span class="pill">#ShortForm_Video</span>
+        <span class="pill">#GA_&_Tableau</span>
+        <span class="pill">#Radio_&_Events</span>
+      </div>
+    </div>
+
+    <div class="profile-frame">
+      <img src="images/avatar.jpg" alt="Claire Wei" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80'">
+      <div class="profile-overlay">
+        <strong>魏岑軒 Claire Wei</strong>
+        <span>Brand Strategy · Content · Data</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="metrics-strip">
+    <div class="metrics-box">
+      <div class="metric-cell">
+        <h3>250K+</h3>
+        <p>單篇 Threads 貼文自然瀏覽</p>
+      </div>
+      <div class="metric-cell">
+        <h3>1st Place</h3>
+        <p>全國品牌公關提案競賽優勝</p>
+      </div>
+      <div class="metric-cell">
+        <h3>149K+</h3>
+        <p>短影音企劃單支觀看人次</p>
+      </div>
+      <div class="metric-cell">
+        <h3>4.8 / 5.0</h3>
+        <p>快閃策展顧客體驗滿意度</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="works-section">
+    <div class="works-header">
+      <div>
+        <h2>Selected Works</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.3rem;">點擊分類篩選，或點擊卡片檢視完整策略、KPI 數據與廣播試聽</p>
+      </div>
+      <div class="filter-group" id="filterGroup">
+        <button class="filter-btn active" data-filter="all">All (6)</button>
+        <button class="filter-btn" data-filter="pr">PR & Strategy</button>
+        <button class="filter-btn" data-filter="social">Social & Video</button>
+        <button class="filter-btn" data-filter="media">Radio & Events</button>
+      </div>
+    </div>
+
+    <div class="grid" id="worksGrid"></div>
+  </section>
+
+  <!-- 專案詳情彈窗 -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-box">
+      <div class="modal-cover">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <img id="mImage" src="" alt="專案封面">
+      </div>
+      <div class="modal-body">
+        <span class="badge-dark" id="mCategory">PR & Strategy</span>
+        <h2 id="mTitle">專案標題</h2>
+
+        <div class="audio-player-card" id="audioPlayerCard">
+          <div class="audio-header">
+            <div class="audio-title-group">
+              <span class="on-air-tag">ON AIR DEMO</span>
+              <span class="audio-track-name" id="audioTrackTitle">節目精華試聽</span>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <button class="play-toggle-btn" id="playToggleBtn" aria-label="播放或暫停">&#9654;</button>
+            <div class="progress-wrapper">
+              <div class="progress-bar-bg" id="progressBarBg">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+              </div>
+              <div class="time-readout">
+                <span id="currentTimeText">00:00</span>
+                <span id="durationTimeText">00:00</span>
+              </div>
+            </div>
+          </div>
+          <audio id="htmlAudioElement" preload="metadata"></audio>
+        </div>
+
+        <div class="modal-kpis" id="mKpis"></div>
+
+        <div class="m-block">
+          <h4>01 // THE CHALLENGE 專案痛點</h4>
+          <p id="mChallenge"></p>
+        </div>
+
+        <div class="m-block">
+          <h4>02 // EXECUTION & IMPACT 執行策略與貢獻</h4>
+          <ul id="mActions"></ul>
+        </div>
+
+        <div class="m-block">
+          <h4>03 // TOOLKIT 使用工具</h4>
+          <p id="mTools" style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent);"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 頁尾與一百分誘導觸發按鈕 -->
+  <footer id="contact">
+    <h3 style="color: #fff; font-size: 1.4rem;">Let's build something memorable.</h3>
+    <p style="font-size: 0.9rem; margin-top: 0.4rem;">逛完作品集了嗎？點擊下方按鈕啟動互動彩蛋（或聯絡我）</p>
+    <button type="button" class="cta-link" id="openScoreModalBtn">Get in Touch ✨</button>
+  </footer>
+
+  <!-- 💯 一百分誘導互動彈窗 -->
+  <div class="modal-backdrop" id="scoreModalBackdrop">
+    <div class="score-modal-box">
+      <button class="modal-close" id="closeScoreModalBtn">&times;</button>
+
+      <!-- 階段一：誘導選項 -->
+      <div id="scorePromptStep">
+        <span class="score-badge">MIS HW5 // VIBE CODING DETECTED</span>
+        <h2>系統偵測到您正在批改作業 👀</h2>
+        <p>感謝老師／助教看到最後！請問您對這份 Vibe Coding 互動作品集的滿意度是？</p>
+
+        <div class="score-arena" id="scoreArena">
+          <button type="button" class="btn-100" id="btnGive100">💯 毫不猶豫給 100 分！</button>
+          <button type="button" class="btn-dodge" id="btnDodge">🤔 再考慮一下（給 85 分）</button>
+        </div>
+      </div>
+
+      <!-- 階段二：按下 100 分後的慶祝畫面 -->
+      <div class="celebration-box" id="celebrationStep">
+        <span class="score-badge">SCORE LOCKED IN</span>
+        <div class="big-100">100 分</div>
+        <h3 style="color: #fff; margin-bottom: 0.6rem;">感謝老師／助教的肯定與高分認證！🎉</h3>
+        <p style="margin-bottom: 1rem;">如果是要找我聊行銷企劃、公關合作或實習機會，歡迎直接寄信給我：</p>
+        <a href="mailto:112405100@g.nccu.edu.tw" class="email-pill">📩 112405100@g.nccu.edu.tw</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cursorGlow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    const projects = [
+      {
+        category: "pr",
+        tag: "PR & Strategy",
+        year: "2026",
+        image: "images/project-1.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80",
+        kpiHighlight: "🏆 品牌公關提案競賽優勝",
+        title: "早安美芝城「台灣感性」品牌煥新公關企劃",
+        summary: "從台式早餐店的日常人情味切入，為老字號品牌打造 Z 世代有感的整合公關波段。",
+        kpis: [
+          { val: "1st", lbl: "全國競賽最終名次" },
+          { val: "3 Phases", lbl: "線上線下整合波段" },
+          { val: "Gen-Z", lbl: "核心年輕受眾重塑" }
+        ],
+        challenge: "面對西式早午餐與連鎖咖啡廳的夾擊，傳統早餐店需要跳脫「僅是果腹」的功能定位，與年輕族群建立情感共鳴。",
+        actions: [
+          "提煉「台灣感性」視覺與生活美學作為核心溝通主軸，設計具社群話題性的體驗活動。",
+          "規劃 KOL 跨界合作與媒體新聞稿策略，完整編列預算與預期聲量指標。",
+          "主導消費者洞察分析與提案簡報架構，最終獲得評審團第一名肯定。"
+        ],
+        tools: "Consumer Insight / PR Campaign / Pitch Deck Design"
+      },
+      {
+        category: "social",
+        tag: "Social & Video",
+        year: "2025",
+        image: "images/project-2.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80",
+        kpiHighlight: "🔥 單篇 Threads 突破 250K 瀏覽",
+        title: "政大金旋獎 Threads 病毒式擴散與心理測驗",
+        summary: "精準掌握社群演算法與迷因語氣，並透過互動心理測驗帶動超過 4 萬人次觸及。",
+        kpis: [
+          { val: "250K+", lbl: "Threads 單篇自然流量" },
+          { val: "40K+", lbl: "心理測驗總觸及人次" },
+          { val: "2,500+", lbl: "完整測驗參與人數" }
+        ],
+        challenge: "大專院校音樂祭競爭激烈，需在有限宣傳期內突破音樂圈同溫層，吸引一般大學生主動關注與轉發。",
+        actions: [
+          "緊扣年輕世代社群語境策劃 Threads 話題貼文，創造單篇 25 萬次自然曝光。",
+          "企劃「音樂人格心理測驗」，設計高分享誘因的結果圖卡，引爆 IG 限動自主擴散。",
+          "統籌參賽音樂人專訪與系列貼文排程，拉高活動整體討論熱度。"
+        ],
+        tools: "Threads / Instagram / Viral Marketing / Canva"
+      },
+      {
+        category: "social",
+        tag: "Social & Video",
+        year: "2025",
+        image: "images/project-3.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80",
+        kpiHighlight: "🎬 Reels 單支觀看突破 149K",
+        title: "《腦筋急轉彎 2》角色穿搭短影音企劃與製作",
+        summary: "與時尚 KOL 合作，將動畫角色色彩心理學轉化為高完播率的日常穿搭變裝 Reels。",
+        kpis: [
+          { val: "149K+", lbl: "IG Reels 自然觀看數" },
+          { val: "Top 1%", lbl: "帳號同期互動與收藏表現" },
+          { val: "End-to-End", lbl: "企劃 × 拍攝 × 剪輯全包" }
+        ],
+        challenge: "電影上映期間話題熱度極高，需快速產出兼具娛樂性與實用穿搭價值的短影音內容以搶佔流量紅利。",
+        actions: [
+          "拆解「樂樂、憂憂、阿焦、阿慕」等角色的代表色與性格特徵，轉化為 5 套日常單品穿搭公式。",
+          "設計快節奏轉場分鏡，強化前 3 秒視覺鉤子（Hook）提升觀眾停留時間。",
+          "獨立完成現場拍攝指導、節奏剪輯與音效配置。"
+        ],
+        tools: "Short-form Scripting / CapCut / Premiere / Reels Analytics"
+      },
+      {
+        category: "pr",
+        tag: "PR & Strategy",
+        year: "2026",
+        image: "images/project-4.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+        kpiHighlight: "📊 醫療健康產業輿情與 KOL 成效分析",
+        title: "公關顧問集團實習：媒體監測與記者會執行",
+        summary: "協助國際醫療健康客戶執行每日媒體輿情監測、KOL 結案數據分析與大型活動支援。",
+        kpis: [
+          { val: "Daily", lbl: "每日精準輿情監測報告" },
+          { val: "100%", lbl: "媒體曝光追蹤準確率" },
+          { val: "On-site", lbl: "大型衛教記者會現場執行" }
+        ],
+        challenge: "醫療公關重視專業度與法規合規性，需精準追蹤媒體風向並量化評估衛教活動的傳播投資報酬率。",
+        actions: [
+          "每日彙整重點新聞與社群聲量（Daily Media Surveillance），提煉關鍵洞察供顧問團隊與客戶決策。",
+          "撰寫 KOL 合作結案報告，分析互動率、觸及成本與受眾留言風向。",
+          "支援大型記者會現場媒體接待與流程控管。"
+        ],
+        tools: "Media Surveillance / Excel Pivot / PR Reporting"
+      },
+      {
+        category: "media",
+        tag: "Radio & Events",
+        year: "2025",
+        image: "images/project-5.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=80",
+        audioSrc: "audio/radio-demo.mp3",
+        audioTitle: "政大之聲 FM88.7《黑暗料理教室》節目精華試聽",
+        kpiHighlight: "🎙️ 8 小時零延誤實況轉播 & 獲獎廣播",
+        title: "政大包種茶節實況轉播 & 獲獎廣播節目製播",
+        summary: "帶領 32 人跨部門團隊完成 8 小時不間斷轉播，並製作多檔榮獲最佳企劃與主持獎之節目。",
+        kpis: [
+          { val: "32 Pax", lbl: "跨部門團隊領導統籌" },
+          { val: "0 Delay", lbl: "8 小時馬拉松轉播準點率" },
+          { val: "3 Awards", lbl: "最佳企劃與最佳雙人主持" }
+        ],
+        challenge: "大型戶外博覽會現場變數極高，需在即時連線、成音技術與節目內容之間維持零失誤的高品質輸出。",
+        actions: [
+          "擔任轉播總召，制定精密 Rundown 與突發狀況備案，協調主持、成音與外場記者。",
+          "獨立製作並主持《黑暗料理教室》、《料理史王》等節目，包辦訪綱撰寫、錄音與音訊後製。",
+          "於超過 20 組節目競爭中獲頒最佳企劃與兩座最佳雙人主持獎。"
+        ],
+        tools: "Project Management / Audio Editing / Live Broadcasting"
+      },
+      {
+        category: "media",
+        tag: "Radio & Events",
+        year: "2026",
+        image: "images/project-6.jpg",
+        fallbackImg: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+        kpiHighlight: "🌲 顧客滿意度 4.8 / 5.0 森林系快閃店",
+        title: "「入夢」森林主題快閃咖啡廳策展與營運",
+        summary: "從零到一打造五感沉浸式快閃體驗，首週吸引逾 40 人次體驗並獲 4.8 分高評價。",
+        kpis: [
+          { val: "4.8 / 5", lbl: "顧客體驗平均滿意度" },
+          { val: "40+ Pax", lbl: "首週進店體驗人次" },
+          { val: "5 Senses", lbl: "空間 × 餐飲 × 故事整合" }
+        ],
+        challenge: "在有限時間與預算下，將抽象的「森林療癒」概念轉化為可執行的線下空間服務與商業驗證。",
+        actions: [
+          "規劃主題空間視覺與動線設計，結合特製飲品與甜點打造沉浸式感官體驗。",
+          "設計服務流程與顧客回饋機制，收集量化評分與質化建議以迭代優化。"
+        ],
+        tools: "Service Design / Experiential Marketing / Operations"
+      }
+    ];
+
+    const grid = document.getElementById('worksGrid');
+    const filterGroup = document.getElementById('filterGroup');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+
+    const audioPlayerCard = document.getElementById('audioPlayerCard');
+    const audioTrackTitle = document.getElementById('audioTrackTitle');
+    const htmlAudio = document.getElementById('htmlAudioElement');
+    const playToggleBtn = document.getElementById('playToggleBtn');
+    const progressBarBg = document.getElementById('progressBarBg');
+    const progressBarFill = document.getElementById('progressBarFill');
+    const currentTimeText = document.getElementById('currentTimeText');
+    const durationTimeText = document.getElementById('durationTimeText');
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "00:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    playToggleBtn.addEventListener('click', () => {
+      if (htmlAudio.paused) {
+        htmlAudio.play().then(() => {
+          playToggleBtn.innerHTML = '&#10074;&#10074;';
+        }).catch(() => {
+          alert("尚未偵測到音檔！請將你的音檔放入 audio/radio-demo.mp3 資料夾路徑中。");
+        });
+      } else {
+        htmlAudio.pause();
+        playToggleBtn.innerHTML = '&#9654;';
+      }
+    });
+
+    htmlAudio.addEventListener('loadedmetadata', () => {
+      durationTimeText.textContent = formatTime(htmlAudio.duration);
+    });
+
+    htmlAudio.addEventListener('timeupdate', () => {
+      const percent = (htmlAudio.currentTime / htmlAudio.duration) * 100 || 0;
+      progressBarFill.style.width = `${percent}%`;
+      currentTimeText.textContent = formatTime(htmlAudio.currentTime);
+    });
+
+    htmlAudio.addEventListener('ended', () => {
+      playToggleBtn.innerHTML = '&#9654;';
+      progressBarFill.style.width = '0%';
+      currentTimeText.textContent = '00:00';
+    });
+
+    progressBarBg.addEventListener('click', (e) => {
+      if (!htmlAudio.duration) return;
+      const rect = progressBarBg.getBoundingClientRect();
+      const clickPos = (e.clientX - rect.left) / rect.width;
+      htmlAudio.currentTime = clickPos * htmlAudio.duration;
+    });
+
+    function renderCards(filter = 'all') {
+      grid.innerHTML = '';
+      const list = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const audioBadgeHtml = item.audioSrc ? `<span class="badge-audio">🎧 AUDIO DEMO</span>` : '';
+        card.innerHTML = `
+          <div class="card-thumb">
+            <div class="card-meta-top">
+              <span class="badge-dark">${item.tag}</span>
+              ${audioBadgeHtml || `<span class="badge-dark">${item.year}</span>`}
+            </div>
+            <img src="${item.image}" alt="${item.title}" onerror="this.src='${item.fallbackImg}'">
+          </div>
+          <div class="card-content">
+            <div>
+              <span class="card-kpi-tag">${item.kpiHighlight}</span>
+              <h3>${item.title}</h3>
+              <p>${item.summary}</p>
+            </div>
+            <div class="card-action">
+              <span>${item.audioSrc ? 'Listen & View Case Study' : 'View Case Study'}</span>
+              <span>↗</span>
+            </div>
+          </div>
+        `;
+        card.addEventListener('click', () => openModal(item));
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(item) {
+      const imgEl = document.getElementById('mImage');
+      imgEl.src = item.image;
+      imgEl.onerror = () => { imgEl.src = item.fallbackImg; };
+
+      document.getElementById('mCategory').textContent = `${item.tag} · ${item.year}`;
+      document.getElementById('mTitle').textContent = item.title;
+      document.getElementById('mChallenge').textContent = item.challenge;
+      document.getElementById('mTools').textContent = item.tools;
+
+      if (item.audioSrc) {
+        audioPlayerCard.classList.add('visible');
+        audioTrackTitle.textContent = item.audioTitle || "廣播節目精華試聽";
+        htmlAudio.src = item.audioSrc;
+        playToggleBtn.innerHTML = '&#9654;';
+        progressBarFill.style.width = '0%';
+        currentTimeText.textContent = '00:00';
+        durationTimeText.textContent = '00:00';
+      } else {
+        audioPlayerCard.classList.remove('visible');
+        htmlAudio.pause();
+        htmlAudio.removeAttribute('src');
+      }
+
+      document.getElementById('mKpis').innerHTML = item.kpis.map(k => `
+        <div class="m-kpi">
+          <strong>${k.val}</strong>
+          <span>${k.lbl}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('mActions').innerHTML = item.actions.map(a => `<li>${a}</li>`).join('');
+
+      modalBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      htmlAudio.pause();
+      playToggleBtn.innerHTML = '&#9654;';
+      modalBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+
+    filterGroup.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('filter-btn')) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      renderCards(e.target.dataset.filter);
+    });
+
+    renderCards('all');
+
+    // ==========================================
+    // 💯 一百分誘導頁面互動邏輯
+    // ==========================================
+    const scoreModalBackdrop = document.getElementById('scoreModalBackdrop');
+    const openScoreModalBtn = document.getElementById('openScoreModalBtn');
+    const closeScoreModalBtn = document.getElementById('closeScoreModalBtn');
+    const btnGive100 = document.getElementById('btnGive100');
+    const btnDodge = document.getElementById('btnDodge');
+    const scorePromptStep = document.getElementById('scorePromptStep');
+    const celebrationStep = document.getElementById('celebrationStep');
+
+    let dodgeCount = 0;
+    const dodgeTexts = [
+      "哎呀手滑了嗎？再試一次 👀",
+      "這個按鈕壞掉了，左邊那個比較好按 👉",
+      "系統自動校正為：給 100 分！✨"
+    ];
+
+    // 開啟誘導視窗並重置狀態
+    openScoreModalBtn.addEventListener('click', () => {
+      dodgeCount = 0;
+      btnDodge.style.transform = 'translate(0, 0)';
+      btnDodge.textContent = '🤔 再考慮一下（給 85 分）';
+      btnGive100.style.transform = 'scale(1)';
+      scorePromptStep.style.display = 'block';
+      celebrationStep.classList.remove('active');
+      scoreModalBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeScoreModal() {
+      scoreModalBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeScoreModalBtn.addEventListener('click', closeScoreModal);
+    scoreModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === scoreModalBackdrop) closeScoreModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeScoreModal();
+      }
+    });
+
+    // 滑鼠靠近或點擊「給低分按鈕」時的調皮閃避與變身邏輯
+    function handleDodge() {
+      if (dodgeCount < 3) {
+        const randomX = (Math.random() - 0.5) * 180;
+        const randomY = (Math.random() - 0.5) * 60;
+        btnDodge.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        btnDodge.textContent = dodgeTexts[dodgeCount];
+        btnGive100.style.transform = `scale(${1 + (dodgeCount + 1) * 0.08})`;
+        dodgeCount++;
+      } else {
+        // 第 4 次直接歸位並同化成 100 分按鈕
+        btnDodge.style.transform = 'translate(0, 0)';
+        btnDodge.textContent = '💯 好啦，我也給 100 分！';
+        btnDodge.style.borderColor = '#f59e0b';
+        btnDodge.style.color = '#f59e0b';
+        btnDodge.onclick = trigger100Celebration;
+      }
+    }
+
+    btnDodge.addEventListener('mouseenter', handleDodge);
+    btnDodge.addEventListener('click', handleDodge);
+
+    // 按下 100 分觸發慶祝與紙花特效
+    function trigger100Celebration() {
+      scorePromptStep.style.display = 'none';
+      celebrationStep.classList.add('active');
+      launchConfetti();
+    }
+
+    btnGive100.addEventListener('click', trigger100Celebration);
+
+    function launchConfetti() {
+      const colors = ['#f59e0b', '#fbbf24', '#10b981', '#3b82f6', '#ec4899', '#ffffff'];
+      for (let i = 0; i < 65; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (Math.random() * 2 + 1.8) + 's';
+        piece.style.animationDelay = (Math.random() * 0.4) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 4000);
+      }
+    }
+  </script>
+</body>
+</html>
